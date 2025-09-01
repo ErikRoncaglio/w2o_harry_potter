@@ -3,13 +3,17 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/character_provider.dart';
+import '../../core/theme/app_theme.dart';
 
 class HouseListPage extends StatelessWidget {
-  const HouseListPage({super.key});
+  final VoidCallback? onNavigateToCharacters;
+
+  const HouseListPage({super.key, this.onNavigateToCharacters});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
 
     return Scaffold(
       body: Padding(
@@ -18,10 +22,10 @@ class HouseListPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Escolha uma casa para ver seus membros:',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              l10n.chooseHouseToSeeMembers,
+              style: theme.textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onBackground,
+                color: theme.colorScheme.onBackground,
               ),
             ),
             const SizedBox(height: 20),
@@ -35,36 +39,36 @@ class HouseListPage extends StatelessWidget {
                   _buildHouseCard(
                     context,
                     l10n,
-                    'Gryffindor',
-                    'Coragem e bravura',
-                    const Color(0xFF740001),
+                    'gryffindor',
+                    l10n.gryffindorDescription,
+                    theme.gryffindorColor,
                     Icons.local_fire_department,
                     0,
                   ),
                   _buildHouseCard(
                     context,
                     l10n,
-                    'Slytherin',
-                    'Ambição e astúcia',
-                    const Color(0xFF1A472A),
+                    'slytherin',
+                    l10n.slytherinDescription,
+                    theme.slytherinColor,
                     Icons.psychology,
                     1,
                   ),
                   _buildHouseCard(
                     context,
                     l10n,
-                    'Ravenclaw',
-                    'Inteligência e sabedoria',
-                    const Color(0xFF0E1A40),
+                    'ravenclaw',
+                    l10n.ravenclawDescription,
+                    theme.ravenclawColor,
                     Icons.school,
                     2,
                   ),
                   _buildHouseCard(
                     context,
                     l10n,
-                    'Hufflepuff',
-                    'Lealdade e trabalho duro',
-                    const Color(0xFFECB939),
+                    'hufflepuff',
+                    l10n.hufflepuffDescription,
+                    theme.hufflepuffColor,
                     Icons.favorite,
                     3,
                   ),
@@ -87,18 +91,16 @@ class HouseListPage extends StatelessWidget {
     int index,
   ) {
     final houseName = _getLocalizedHouseName(l10n, houseKey);
+    final theme = Theme.of(context);
 
     return Card(
       elevation: 4,
       child: InkWell(
         onTap: () {
-          // Filtra personagens por casa
           final provider = context.read<CharacterProvider>();
           provider.fetchCharactersByHouse(houseKey);
 
-          // Volta para a primeira aba (personagens)
-          // Isso funciona porque a HomePage usa IndexedStack
-          DefaultTabController.of(context)?.animateTo(0);
+          onNavigateToCharacters?.call();
         },
         borderRadius: BorderRadius.circular(12),
         child: Container(
@@ -126,7 +128,7 @@ class HouseListPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 Text(
                   houseName,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: color,
                   ),
@@ -135,10 +137,8 @@ class HouseListPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   description,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withOpacity(0.7),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurface.withOpacity(0.7),
                   ),
                   textAlign: TextAlign.center,
                 ),

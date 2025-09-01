@@ -115,7 +115,7 @@ class SettingsPage extends StatelessWidget {
         RadioListTile<ThemeMode>(
           contentPadding: EdgeInsets.zero,
           title: Text(l10n.themeSystem),
-          subtitle: Text('Seguir configuração do sistema'),
+          subtitle: Text(l10n.themeSystemDescription),
           value: ThemeMode.system,
           groupValue: settingsProvider.themeMode,
           onChanged: (value) {
@@ -127,7 +127,7 @@ class SettingsPage extends StatelessWidget {
         RadioListTile<ThemeMode>(
           contentPadding: EdgeInsets.zero,
           title: Text(l10n.themeLight),
-          subtitle: Text('Tema claro'),
+          subtitle: Text(l10n.themeLightDescription),
           value: ThemeMode.light,
           groupValue: settingsProvider.themeMode,
           onChanged: (value) {
@@ -139,7 +139,7 @@ class SettingsPage extends StatelessWidget {
         RadioListTile<ThemeMode>(
           contentPadding: EdgeInsets.zero,
           title: Text(l10n.themeDark),
-          subtitle: Text('Tema escuro'),
+          subtitle: Text(l10n.themeDarkDescription),
           value: ThemeMode.dark,
           groupValue: settingsProvider.themeMode,
           onChanged: (value) {
@@ -162,7 +162,7 @@ class SettingsPage extends StatelessWidget {
         RadioListTile<String>(
           contentPadding: EdgeInsets.zero,
           title: Text(l10n.languagePortuguese),
-          subtitle: const Text('Português (Brasil)'),
+          subtitle: Text(l10n.languagePortugueseNative),
           value: 'pt',
           groupValue: settingsProvider.locale.languageCode,
           onChanged: (value) {
@@ -174,7 +174,7 @@ class SettingsPage extends StatelessWidget {
         RadioListTile<String>(
           contentPadding: EdgeInsets.zero,
           title: Text(l10n.languageEnglish),
-          subtitle: const Text('English (United States)'),
+          subtitle: Text(l10n.languageEnglishNative),
           value: 'en',
           groupValue: settingsProvider.locale.languageCode,
           onChanged: (value) {

@@ -25,6 +25,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
+    final pages = [
+      const CharacterListPage(),
+      const SpellListPage(),
+      HouseListPage(
+        onNavigateToCharacters: () {
+          setState(() {
+            _selectedIndex = 0;
+          });
+        },
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.appTitle),
@@ -40,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: IndexedStack(index: _selectedIndex, children: _pages),
+      body: IndexedStack(index: _selectedIndex, children: pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {

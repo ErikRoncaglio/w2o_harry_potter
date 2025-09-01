@@ -58,7 +58,6 @@ class SpellListItem extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
         onTap: () {
-          // Exibe um snackbar com informações da magia
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('${l10n.spellName}: ${spell.name}'),

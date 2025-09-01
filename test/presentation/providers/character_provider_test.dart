@@ -59,6 +59,12 @@ void main() {
           house: 'Gryffindor',
           image: 'test.jpg',
           actor: 'Daniel Radcliffe',
+          alternateNames: ['The Boy Who Lived'],
+          wizard: true,
+          hogwartsStudent: true,
+          hogwartsStaff: false,
+          alternateActors: [],
+          alive: true,
         ),
         Character(
           id: '2',
@@ -66,6 +72,12 @@ void main() {
           house: 'Gryffindor',
           image: 'test2.jpg',
           actor: 'Emma Watson',
+          alternateNames: [],
+          wizard: true,
+          hogwartsStudent: true,
+          hogwartsStaff: false,
+          alternateActors: [],
+          alive: true,
         ),
       ];
       mockRepository.charactersToReturn = expectedCharacters;

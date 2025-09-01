@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:w2o_harry_potter/core/theme/app_theme.dart';
 import '../providers/character_provider.dart';
 import '../widgets/character_list_item.dart';
 
@@ -18,7 +19,6 @@ class _CharacterListPageState extends State<CharacterListPage> {
   @override
   void initState() {
     super.initState();
-    // Chama fetchCharacters uma única vez ao inicializar a tela
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = context.read<CharacterProvider>();
       if (provider.selectedHouse != null) {
@@ -33,20 +33,12 @@ class _CharacterListPageState extends State<CharacterListPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    _houses = [
-      l10n.gryffindor,
-      l10n.slytherin,
-      l10n.ravenclaw,
-      l10n.hufflepuff,
-    ];
+    _houses = ['gryffindor', 'slytherin', 'ravenclaw', 'hufflepuff',];
 
     return Scaffold(
       body: Column(
         children: [
-          // Filtro por casa
           _buildHouseFilter(l10n),
-
-          // Lista de personagens
           Expanded(
             child: Consumer<CharacterProvider>(
               builder: (context, provider, child) {
@@ -197,7 +189,7 @@ class _CharacterListPageState extends State<CharacterListPage> {
                   ),
                   ..._houses.map((house) {
                     return FilterChip(
-                      label: Text(house),
+                      label: Text(_getHouseLabel(house)),
                       selected: provider.selectedHouse == house,
                       onSelected: (selected) {
                         if (selected) {
@@ -217,18 +209,35 @@ class _CharacterListPageState extends State<CharacterListPage> {
     );
   }
 
-  Color _getHouseColor(String house) {
-    final l10n = AppLocalizations.of(context)!;
-
-    if (house == l10n.gryffindor) {
-      return const Color(0xFF740001); // Gryffindor Red
-    } else if (house == l10n.slytherin) {
-      return const Color(0xFF1A472A); // Slytherin Green
-    } else if (house == l10n.ravenclaw) {
-      return const Color(0xFF0E1A40); // Ravenclaw Blue
-    } else if (house == l10n.hufflepuff) {
-      return const Color(0xFFECB939); // Hufflepuff Yellow
+  String _getHouseLabel(String houseKey) {
+    switch (houseKey) {
+      case 'gryffindor':
+        return AppLocalizations.of(context)!.gryffindor;
+      case 'slytherin':
+        return AppLocalizations.of(context)!.slytherin;
+      case 'ravenclaw':
+        return AppLocalizations.of(context)!.ravenclaw;
+      case 'hufflepuff':
+        return AppLocalizations.of(context)!.hufflepuff;
+      default:
+        return houseKey;
     }
-    return Theme.of(context).colorScheme.primary;
+  }
+
+  Color _getHouseColor(String houseKey) {
+    final theme = Theme.of(context);
+
+    switch (houseKey) {
+      case 'gryffindor':
+        return theme.gryffindorColor;
+      case 'slytherin':
+        return theme.slytherinColor;
+      case 'ravenclaw':
+        return theme.ravenclawColor;
+      case 'hufflepuff':
+        return theme.hufflepuffColor;
+      default:
+        return theme.colorScheme.primary;
+    }
   }
 }

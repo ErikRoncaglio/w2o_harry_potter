@@ -16,7 +16,6 @@ class _SpellListPageState extends State<SpellListPage> {
   @override
   void initState() {
     super.initState();
-    // Chama fetchSpells uma única vez ao inicializar a tela
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<SpellProvider>().fetchSpells();
     });
@@ -111,10 +110,9 @@ class _SpellListPageState extends State<SpellListPage> {
             padding: const EdgeInsets.all(8.0),
             itemCount: provider.spells.length,
             itemBuilder: (context, index) {
-              return SpellListItem(spell: provider.spells[index])
-                  .animate()
-                  .fadeIn(delay: (index * 50).ms)
-                  .slideX(begin: 0.1, delay: (index * 50).ms);
+              return SpellListItem(
+                spell: provider.spells[index],
+              ).animate().fadeIn(delay: 70.ms).slideX(begin: 0.1, delay: 70.ms);
             },
           );
         },

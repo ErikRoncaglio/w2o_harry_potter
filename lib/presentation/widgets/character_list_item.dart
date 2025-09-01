@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:w2o_harry_potter/core/theme/app_theme.dart';
 import '../../domain/entities/character.dart';
 import '../pages/character_detail_page.dart';
 
@@ -132,17 +133,19 @@ class CharacterListItem extends StatelessWidget {
   }
 
   Color _getHouseColor(BuildContext context, String house) {
+    final theme = Theme.of(context);
+
     switch (house.toLowerCase()) {
       case 'gryffindor':
-        return const Color(0xFF740001); // Gryffindor Red
+        return theme.gryffindorColor;
       case 'slytherin':
-        return const Color(0xFF1A472A); // Slytherin Green
+        return theme.slytherinColor;
       case 'ravenclaw':
-        return const Color(0xFF0E1A40); // Ravenclaw Blue
+        return theme.ravenclawColor;
       case 'hufflepuff':
-        return const Color(0xFFECB939); // Hufflepuff Yellow
+        return theme.hufflepuffColor;
       default:
-        return Theme.of(context).colorScheme.primary;
+        return theme.colorScheme.primary;
     }
   }
 }

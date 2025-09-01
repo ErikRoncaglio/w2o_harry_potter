@@ -19,7 +19,6 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
 
-      // Carregar tema
       final themeModeString = prefs.getString(_themeModeKey);
       if (themeModeString != null) {
         _themeMode = ThemeMode.values.firstWhere(
@@ -28,7 +27,6 @@ class SettingsProvider extends ChangeNotifier {
         );
       }
 
-      // Carregar idioma
       final localeString = prefs.getString(_localeKey);
       if (localeString != null) {
         if (localeString == 'en') {
@@ -40,7 +38,6 @@ class SettingsProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      // Em caso de erro, usar valores padrão
       debugPrint('Erro ao carregar configurações: $e');
     }
   }

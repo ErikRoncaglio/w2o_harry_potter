@@ -14,11 +14,7 @@ class WandModel {
   @HiveField(2)
   final double? length;
 
-  WandModel({
-    this.wood,
-    this.core,
-    this.length,
-  });
+  WandModel({this.wood, this.core, this.length});
 
   factory WandModel.fromJson(Map<String, dynamic> json) {
     return WandModel(
@@ -143,9 +139,26 @@ class CharacterModel {
     return Character(
       id: id,
       name: name,
+      alternateNames: alternateNames,
+      species: species,
+      gender: gender,
       house: house,
-      image: image,
+      dateOfBirth: dateOfBirth,
+      yearOfBirth: yearOfBirth,
+      wizard: wizard,
+      ancestry: ancestry,
+      eyeColour: eyeColour,
+      hairColour: hairColour,
+      wandWood: wand?.wood,
+      wandCore: wand?.core,
+      wandLength: wand?.length,
+      patronus: patronus,
+      hogwartsStudent: hogwartsStudent,
+      hogwartsStaff: hogwartsStaff,
       actor: actor,
+      alternateActors: alternateActors,
+      alive: alive,
+      image: image,
     );
   }
 }
